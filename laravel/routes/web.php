@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
 
 
 Route::get('/', function () {
-    return redirect('/students');
+    return redirect('/login');
 });
 
 // Auth
+Route::get('/login', [AuthController::class, 'index'])->name('auth.index');
+Route::post('/user-login', [AuthController::class, 'login'])->name('auth.login');
 
 
 
@@ -29,6 +32,8 @@ Route::get('/', function () {
     
    
     // Logout
-  
+  Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+
 
 

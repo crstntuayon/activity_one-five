@@ -14,6 +14,9 @@
                         <button type="button" class="btn btn-primary" style="float: right;" data-bs-toggle="modal" data-bs-target="#addNewModal">
                             Add New Students
                         </button>
+                        
+                        <a href="{{ route('auth.logout') }}" class="btn btn-danger" style="float: right; margin-right: 8px;">Logout</a>
+
                     </div>
 
                     @if(Session("success"))
