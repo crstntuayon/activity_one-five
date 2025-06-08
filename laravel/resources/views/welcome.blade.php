@@ -1,7 +1,13 @@
 @extends('base')
 @section('title', 'Welcome Page')
 
-
+<form action="{{ route('students.search') }}" method="GET" class="mb-2" style="margin-top: 15px; margin-left: 983px;">
+    <div class="input-group">
+        <input type="text" class="form-control me-2" style="max-width: 220px;" placeholder="Search Student's name" name="search" value="{{ request('search') }}">
+        <button class="btn btn-primary me-2" type="submit">Search</button>
+        <a href="{{ route('students.index') }}" class="btn btn-secondary">Clear Search</a>
+    </div>
+</form>
 
 <div class="centered-div">
     <div class="container">
@@ -10,6 +16,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 style="float: left;"><strong>Student List</strong></h4>
+
+                        
                         <!-- Action btn for modal -->
                         <button type="button" class="btn btn-primary" style="float: right;" data-bs-toggle="modal" data-bs-target="#addNewModal">
                             Add New Students
@@ -24,6 +32,12 @@
                         {{ session('success') }}
                     </span>
                     @endif
+
+                   @if($students->isEmpty())
+                   <p style="margin-left: 15px; margin-top: 15px;">Name not found...</p>
+                   @else
+                       {{ $students->links() }} <!-- For pagination -->
+                   @endif
 
                     <div class="card-body">
                         <table class="table table-bordered">

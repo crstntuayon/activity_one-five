@@ -3,6 +3,7 @@
 use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Middleware\AuthCheck;
 
 
 Route::get('/', function () {
@@ -10,13 +11,19 @@ Route::get('/', function () {
 });
 
 // Auth
+//Login
 Route::get('/login', [AuthController::class, 'index'])->name('auth.index');
 Route::post('/user-login', [AuthController::class, 'login'])->name('auth.login');
 
+// Register
+Route::get('/register', [AuthController::class, 'indexRegister'])->name('auth.register');
+Route::post('/user-register', [AuthController::class, 'userRegister'])->name('auth.userRegister');
+
+Route::middleware([AuthCheck::class])->group(function () {
 
 
     // View
-    Route::get('/students', [StudentsController::class, 'myView'])->name('std.myView');
+    Route::get('/students/view', [StudentsController::class, 'myView'])->name('std.myView');
     // Create
     Route::post('/add-new', [StudentsController::class, 'addNewStudent'])->name('std.addNewStudent');
     // PUT
@@ -25,7 +32,10 @@ Route::post('/user-login', [AuthController::class, 'login'])->name('auth.login')
     // DELETE
     Route::get('/delete/{id}', [StudentsController::class, 'deleteME'])->name('std.studentDelete');
     
-    use App\Http\Controllers\YourController; // Replace with actual controller
+   
+// Search Students from list
+Route::get('/students', [StudentsController::class, 'index'])->name('students.index');  // Protected
+Route::get('/students/search', [StudentsController::class, 'search'])->name('students.search');  // Protected
 
 
 
@@ -34,6 +44,6 @@ Route::post('/user-login', [AuthController::class, 'login'])->name('auth.login')
     // Logout
   Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-
+});
 
 

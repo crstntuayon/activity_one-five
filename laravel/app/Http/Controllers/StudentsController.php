@@ -8,16 +8,9 @@ use Illuminate\Http\Request;
 
 
 
+
 class StudentsController extends Controller
 {
-    // READ
-    public function myView()
-    {
-        $students = Students::all();
-        $users = User::all();
-
-        return view('welcome', compact('students', 'users'));
-    }
 
     // CREATE
     public function addNewStudent(Request $request)
@@ -39,6 +32,17 @@ class StudentsController extends Controller
 
         return back()->with('success', 'Student added successfully');
     }
+
+
+    // READ
+    public function myView()
+    {
+        $students = Students::all();
+        $users = User::all();
+
+        return view('welcome', compact('students', 'users'));
+    }
+
 
     // UPDATE
     public function updateView($id)
@@ -64,4 +68,22 @@ class StudentsController extends Controller
         Students::where('id', '=', $id)->delete();
         return back()->with('success', 'Student deleted successfully');
     }
+
+      public function index(Request $request)
+    {
+       $students = Students::paginate(5);  
+       $totalStudents = Students::count();
+       return view('welcome', compact('students')); // Return the dashboard view with students data
+    }
+
+     public function search(Request $request)
+    {
+      $search = $request->input('search'); // Get the search query from the request
+      $students = Students::where('name', 'like', "%{$search}%")->paginate(5)->appends(['search' => $search]); // Preserve the search query in the pagination links
+
+        return view('welcome', compact('students')); // Pass the search results to the view
+        
+    }
+
+
 }
