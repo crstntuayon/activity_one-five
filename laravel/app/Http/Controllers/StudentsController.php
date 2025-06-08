@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\Students;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+
+
+class StudentsController extends Controller
 {
     // READ
     public function myView()
     {
-        $students = Student::all();
+        $students = Students::all();
         $users = User::all();
 
         return view('welcome', compact('students', 'users'));
@@ -26,7 +28,7 @@ class StudentController extends Controller
             'gender' => 'required',
         ]);
 
-        $add_new = new Student;
+        $add_new = new Students;
         $add_new->id = $request->id;
         $add_new->name = $request->name;
         $add_new->age = $request->age;
@@ -41,25 +43,25 @@ class StudentController extends Controller
     // UPDATE
     public function updateView($id)
     {
-        $students = Student::where('id', '=', $id)->get();
+        $students = Students::where('id', '=', $id)->get();
         return view('update', compact('students'));
     }
 
 
     public function updateME(Request $request)
     {
-        Student::where('id', '=', $request->id)->update([
+        Students::where('id', '=', $request->id)->update([
             'name' => $request->name,
             'age' => $request->age,
             'gender' => $request->gender,
         ]);
-
+     
         return redirect('/')->with('success', 'Student updated successfully');
     }
 
     public function deleteME($id)
     {
-        Student::where('id', '=', $id)->delete();
+        Students::where('id', '=', $id)->delete();
         return back()->with('success', 'Student deleted successfully');
     }
 }

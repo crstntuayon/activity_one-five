@@ -1,10 +1,8 @@
 <?php
 
 namespace Database\Seeders;
- use App\Models\Student;
+ use App\Models\Students;
 
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class StudentSeeder extends Seeder
@@ -16,19 +14,19 @@ class StudentSeeder extends Seeder
 
 public function run()
 {
-    Student::create([
+    Students::create([
         'name' => 'Alice Johnson',
         'email' => 'alice@example.com',
         'course' => 'Computer Science',
     ]);
 
-    Student::create([
+    Students::create([
         'name' => 'Bob Smith',
         'email' => 'bob@example.com',
         'course' => 'Mathematics',
     ]);
 
-    Student::create([
+    Students::create([
         'name' => 'Charlie Brown',
         'email' => 'charlie@example.com',
         'course' => 'Physics',

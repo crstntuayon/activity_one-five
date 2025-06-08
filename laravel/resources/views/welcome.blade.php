@@ -3,7 +3,6 @@
 
 
 
-
 <div class="centered-div">
     <div class="container">
         <div class="row">
@@ -12,12 +11,9 @@
                     <div class="card-header">
                         <h4 style="float: left;"><strong>Student List</strong></h4>
                         <!-- Action btn for modal -->
-                       
                         <button type="button" class="btn btn-primary" style="float: right;" data-bs-toggle="modal" data-bs-target="#addNewModal">
                             Add New Students
                         </button>
-
-                        
                     </div>
 
                     @if(Session("success"))
@@ -34,7 +30,7 @@
                                     <th style="text-align: center;">Name</th>
                                     <th style="text-align: center;">Age</th>
                                     <th style="text-align: center;">Gender</th>
-                                    
+                                    <th style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,7 +40,10 @@
                                     <td>{{ $std -> name }}</td>
                                     <td>{{ $std -> age }}</td>
                                     <td>{{ $std -> gender }}</td>
-                                    
+                                    <td style="width: 150px;">
+                                        <a class="btn btn-primary" href="{{ route('std.updateView', $std -> id) }}">Edit</a>
+                                        <a class="btn btn-danger" href="{{ route('std.studentDelete', $std -> id) }}">Delete</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

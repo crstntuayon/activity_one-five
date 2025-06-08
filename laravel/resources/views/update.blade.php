@@ -7,7 +7,7 @@
             <div class="card shadow-lg mb-5">
                 <div class="card-body p-6">
                     @foreach($students as $std)
-                    <form method="post" action="{{ route('std.studentUpdate') }}">
+                    <form action="{{ route('std.studentUpdate') }}" method="POST" >
                         @csrf
                         <div class="mb-3 d-none">
                             <label for="id" class="form-label">ID</label>
