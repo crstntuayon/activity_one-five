@@ -35,8 +35,6 @@
 
                    @if($students->isEmpty())
                    <p style="margin-left: 15px; margin-top: 15px;">Name not found...</p>
-                   @else
-                       {{ $students->links() }} <!-- For pagination -->
                    @endif
 
                     <div class="card-body">
